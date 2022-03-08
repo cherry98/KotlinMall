@@ -1,0 +1,60 @@
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
+
+android {
+    configurations.all {
+        resolutionStrategy { force 'androidx.core:core-ktx:1.6.0' }
+    }
+    compileSdk 29
+
+    defaultConfig {
+        minSdk 23
+        targetSdk 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    api 'androidx.core:core-ktx:1.6.0'
+    api 'androidx.appcompat:appcompat:1.3.0'
+    api 'com.google.android.material:material:1.4.0'
+
+    //RxKotlin and RxAndroid
+    api "io.reactivex:rxkotlin:$rx_kotlin_version"
+    api "io.reactivex:rxandroid:$rx_android_version"
+    //Retrofit okhttp
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    api "com.squareup.retrofit2:adapter-rxjava:$retrofit_version"
+    api "com.squareup.okhttp3:logging-interceptor:4.9.3"
+    //dagger2
+    api "com.google.dagger:dagger:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+
+    //anko commons
+    api "org.jetbrains.anko:anko-commons:$anko_version"
+    api "org.jetbrains.anko:anko-sdk25:$anko_version"
+    api "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
+}
